@@ -1,5 +1,7 @@
 package com.gani.hsmsimulator.serve;
 
+import com.gani.hsmsimulator.controller.CommandController;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -24,19 +26,23 @@ public class RequestHandler extends Thread {
             int msgLength = getMessageLength(i0, i1);
 
             StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("hello ");
             for (int i = 0; i < msgLength; i++){
                 stringBuffer.append((char) inputStream.read());
             }
 
-            String response = stringBuffer.toString();
+            // process request
+            String response = CommandController.processRequest(stringBuffer.toString());
+
+            // prepare mli
             String mli = getMli(response);
-            String responseHex = mli + convertStringToHex(stringBuffer.toString());
-
+            // construct response hex
+            String responseHex = mli + convertStringToHex(response);
+            // covert to byte arrays
             byte [] byteArrays = hexStringToByteArray(responseHex);
-
+            // send response
             outputStream.write(byteArrays);
 
+            // close
             outputStream.close();
             inputStream.close();
             this.clientSocket.close();
