@@ -1,37 +1,20 @@
 package com.gani.hsmsimulator.command;
 
+import com.gani.hsmsimulator.command.base.BaseResponseCommand;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Record;
 
 @Record
-public class ND {
-    @Field(at = 1, length = 2)
-    private String responseCode;
+public class ND extends BaseResponseCommand {
+    public ND() {
+        this.setResponseCode("ND");
+    }
 
-    @Field(at = 2, length = 2)
-    private String errorCode;
-
-    @Field(at = 3, length = 16)
+    @Field(ordinal = 2, length = 16)
     private String lmkCheck;
 
-    @Field(at = 4, length = 9)
+    @Field(ordinal = 3, length = 9)
     private String firmwareNumber;
-
-    public String getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(String responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
 
     public String getLmkCheck() {
         return lmkCheck;

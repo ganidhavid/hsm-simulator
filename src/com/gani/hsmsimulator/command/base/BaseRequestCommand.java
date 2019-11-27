@@ -6,7 +6,7 @@ import org.beanio.annotation.Record;
 @Record
 public class BaseRequestCommand {
 
-    @Field(at = 0, length = 2)
+    @Field(ordinal = 0, length = 2)
     private String command;
 
     public String getCommand() {

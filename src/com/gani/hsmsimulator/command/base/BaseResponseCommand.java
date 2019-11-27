@@ -6,10 +6,10 @@ import org.beanio.annotation.Record;
 @Record
 public class BaseResponseCommand {
 
-    @Field(at = 0, length = 2)
+    @Field(ordinal = 0, length = 2)
     private String responseCode;
 
-    @Field(at = 1, length = 2)
+    @Field(ordinal = 1, length = 2)
     private String errorCode;
 
     public String getResponseCode() {
