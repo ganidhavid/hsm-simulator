@@ -30,8 +30,13 @@ public class RequestHandler extends Thread {
                 stringBuffer.append((char) inputStream.read());
             }
 
+            String request = stringBuffer.toString();
+            System.out.println("HSM Simulator Handler -- Received " + request);
+
             // process request
-            String response = CommandController.processRequest(stringBuffer.toString());
+            String response = CommandController.processRequest(request);
+
+            System.out.println("HSM Simulator Handler -- Response " + response);
 
             // prepare mli
             String mli = getMli(response);
@@ -46,6 +51,7 @@ public class RequestHandler extends Thread {
             outputStream.close();
             inputStream.close();
             this.clientSocket.close();
+            System.out.println("HSM Simulator Handler -- Closed client");
         } catch (IOException e) {
             e.printStackTrace();
         }
