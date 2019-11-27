@@ -1,13 +1,14 @@
 package com.gani.hsmsimulator.command;
 
 import com.gani.hsmsimulator.command.base.BaseResponseCommand;
+import com.gani.hsmsimulator.constants.Command;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Record;
 
 @Record
 public class ND extends BaseResponseCommand {
     public ND() {
-        this.setResponseCode("ND");
+        this.setResponseCode(Command.ND);
     }
 
     @Field(ordinal = 2, length = 16)

@@ -1,5 +1,6 @@
 package com.gani.hsmsimulator.command.base;
 
+import com.gani.hsmsimulator.constants.Command;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Record;
 
@@ -7,16 +8,16 @@ import org.beanio.annotation.Record;
 public class BaseResponseCommand {
 
     @Field(ordinal = 0, length = 2)
-    private String responseCode;
+    private Command responseCode;
 
     @Field(ordinal = 1, length = 2)
     private String errorCode;
 
-    public String getResponseCode() {
+    public Command getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(String responseCode) {
+    public void setResponseCode(Command responseCode) {
         this.responseCode = responseCode;
     }
 

@@ -1,19 +1,21 @@
 package com.gani.hsmsimulator.command.base;
 
+import com.gani.hsmsimulator.constants.Command;
+import com.gani.hsmsimulator.service.CommandHandler;
 import org.beanio.annotation.Field;
 import org.beanio.annotation.Record;
 
 @Record
-public class BaseRequestCommand {
+public abstract class BaseRequestCommand implements CommandHandler {
 
     @Field(ordinal = 0, length = 2)
-    private String command;
+    private Command command;
 
-    public String getCommand() {
+    public Command getCommand() {
         return command;
     }
 
-    public void setCommand(String command) {
+    public void setCommand(Command command) {
         this.command = command;
     }
 }
