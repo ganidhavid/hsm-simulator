@@ -23,7 +23,8 @@ Then you have to convert to hex string, the result are.
 Before send to hsm, you have to calculate message length, for above message, the length in decimal is 6.
 Therefor you have to convert to hex 4 digit with zero padding.
 > Convert to Hex 6 -> 6
-> Padding 0 > 0006 
+>
+> Padding 0 -> 0006 
 
 The final message will look like,
 > 0006303030304e43
