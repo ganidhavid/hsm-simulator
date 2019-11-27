@@ -9,9 +9,11 @@ import java.net.Socket;
 
 public class RequestHandler extends Thread {
     private Socket clientSocket;
+    private String header;
 
-    public RequestHandler(Socket clientSocket) {
+    public RequestHandler(Socket clientSocket, String header) {
         this.clientSocket = clientSocket;
+        this.header = header;
     }
 
     @Override
@@ -20,21 +22,39 @@ public class RequestHandler extends Thread {
             BufferedInputStream inputStream = new BufferedInputStream(clientSocket.getInputStream());
             BufferedOutputStream outputStream = new BufferedOutputStream(clientSocket.getOutputStream());
 
+            // read mli
             int i0 = inputStream.read();
             int i1 = inputStream.read();
 
             int msgLength = getMessageLength(i0, i1);
 
+            // read as long as mli
             StringBuffer stringBuffer = new StringBuffer();
             for (int i = 0; i < msgLength; i++){
                 stringBuffer.append((char) inputStream.read());
             }
 
+            // get request
             String request = stringBuffer.toString();
             System.out.println("HSM Simulator Handler -- Received " + request);
 
+            // check header
+            boolean isValidHeader = false;
+            if (null != this.header) {
+                if (request.length() >= this.header.length())
+                    isValidHeader = request.substring(0, this.header.length()).equals(this.header);
+            } else {
+                isValidHeader = true;
+                this.header = "";
+            }
+
             // process request
-            String response = CommandController.processRequest(request);
+            String response = null;
+            if (isValidHeader) {
+                response = CommandController.processRequest(request.substring(this.header.length(), request.length()));
+            } else {
+                response = "";
+            }
 
             System.out.println("HSM Simulator Handler -- Response " + response);
 

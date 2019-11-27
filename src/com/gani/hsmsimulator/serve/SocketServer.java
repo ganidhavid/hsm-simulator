@@ -11,8 +11,12 @@ public class SocketServer {
     private static int port;
 
     public static void main(String[] args) throws IOException {
-        // read port
+        // read port and header
         int port = Integer.parseInt(args[0]);
+        String header = null;
+        if (null != args[1]) {
+            header = args[1];
+        }
 
         //create the socket server object
         server = new ServerSocket(port);
@@ -22,7 +26,7 @@ public class SocketServer {
             //creating socket. waiting, and send to handler for client connection
             Socket client = server.accept();
             System.out.println("HSM Simulator Server -- Accepting client, send to handler");
-            new RequestHandler(client).start();
+            new RequestHandler(client, header).start();
         }
     }
 }
