@@ -7,8 +7,6 @@ import java.net.Socket;
 public class SocketServer {
     //static ServerSocket variable
     private static ServerSocket server;
-    //socket server port on which it will listen
-    private static int port;
 
     public static void main(String[] args) throws IOException {
         // read port and header
